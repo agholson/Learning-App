@@ -33,21 +33,43 @@ struct HomeView: View {
                                 // Link to the next view
                                 NavigationLink(
                                     // When the user clicks this, we execute the code to determine our current module
-                                    destination: ContentView()
+                                    destination:
+                                        ContentView()
                                         .onAppear(perform: {
                                             model.beginModule(module.id)
                                         }),
                                     tag: module.id,
-                                    selection: $model.currentContentSelected, // Make binding here that matches tag
-                                    label: {
+                                    selection: $model.currentContentSelected) // Make binding here that matches tag
+                                    {
                                         // If user clicks on the learning card, then that's the destination
                                         // Learning card
                                         HomeViewRow(image: module.content.image, title: "Learn \(module.category)", description: module.content.description, count: "\(module.content.lessons.count) lessons", time: module.content.time)
                                         
-                                    })
+                                    }
+                              
+                                // MARK: - Test card
+//                                TODO: Uncomment below, if the other does not work
+//                                NavigationLink(
+//                                    destination: TestView()
+//                                        .onAppear(perform: {
+//                                            model.beginTest(module.id)
+//                                        }),
+//                                    tag: module.id,
+//                                    selection: $model.currentTestSelected) {  // Uses closure versus the
+//                                    HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
+//                                }
                                 
-                                // Test card
-                                HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
+                                NavigationLink(
+                                    tag: module.id,
+                                    selection: $model.currentTestSelected,
+                                    destination:
+                                        TestView()
+                                        .onAppear(perform: {
+                                            model.beginTest(module.id)
+                                        })
+                                ) {
+                                    HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count)", time: module.test.time)
+                                }
                             }
                         }
                         

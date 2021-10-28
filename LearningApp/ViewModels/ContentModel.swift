@@ -19,11 +19,16 @@ class ContentModel: ObservableObject {
     @Published var currentLesson: Lesson? // @Published notifies any views that rely on this property that it changed
     var currentLessonIndex = 0
     
+    // Current Test Question
+    @Published var currentQuestion: Question?
+    var currentQuestionIndex = 0
+    
     // Current lesson explanation
     @Published var lessonDescription = NSAttributedString()
     
     // Tracks tag for current selected content and tag
     @Published var currentContentSelected: Int?
+    @Published var currentTestSelected:Int?
     
     // Make styleData property with nill allowed. This tracks our CSS/ HTML styles
     var styleData: Data?
@@ -150,6 +155,21 @@ class ContentModel: ObservableObject {
     func hasNextLesson() -> Bool {
         // If there is still another lesson, then we return true/ false here 
         return (currentLessonIndex + 1 < currentModule!.content.lessons.count)
+        
+    }
+    
+    func beginTest(_ moduleId:Int) {
+        
+        // Set the current module
+        beginModule(moduleId)
+        
+        // Set the current question to the first one
+        currentQuestionIndex = 0
+        
+        // If there are questions, set the current test question to the first one
+        if currentModule?.test.questions.count ?? 0 > 0 {
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+        }
         
     }
     
