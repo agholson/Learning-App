@@ -87,7 +87,6 @@
 				412E90A226FD5E0100909955 /* ViewModels */,
 				412E90A326FD5E1000909955 /* Models */,
 				412E90A426FD5E1500909955 /* Resources */,
-				412E90A526FD5E2200909955 /* Helpers */,
 				412E909626FD5D4C00909955 /* Assets.xcassets */,
 				412E909B26FD5D4C00909955 /* Info.plist */,
 				412E909826FD5D4C00909955 /* Preview Content */,
@@ -106,15 +105,10 @@
 		412E90A126FD5DFB00909955 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				412E909426FD5D4900909955 /* HomeView.swift */,
-				417E14E7270687E600E1A4A6 /* HomeViewRow.swift */,
-				41832092270BB1B9007E20F0 /* ContentView.swift */,
-				4170E64A270FE2C600D44C28 /* ContentViewRow.swift */,
-				41436F42271B1FAA0096DBC0 /* ContentDetailView.swift */,
-				41F266C3272DD76B0012F7E4 /* TestView.swift */,
-				41454D22272F1BEE002C2BD4 /* TestResultView.swift */,
-				41436F81271B7E390096DBC0 /* CodeTextView.swift */,
-				41EC6B6C2725C51100DFCB47 /* RectangleCard.swift */,
+				75FCCB7F27AECF09000AE646 /* Home */,
+				75FCCB8027AECF49000AE646 /* ModuleContentView */,
+				75FCCB8127AECF62000AE646 /* Tests */,
+				75FCCB8227AECF76000AE646 /* Utilities */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -145,19 +139,49 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		412E90A526FD5E2200909955 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		41436F44271B23A20096DBC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				41436F45271B23A20096DBC0 /* AVKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75FCCB7F27AECF09000AE646 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				412E909426FD5D4900909955 /* HomeView.swift */,
+				417E14E7270687E600E1A4A6 /* HomeViewRow.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		75FCCB8027AECF49000AE646 /* ModuleContentView */ = {
+			isa = PBXGroup;
+			children = (
+				41832092270BB1B9007E20F0 /* ContentView.swift */,
+				4170E64A270FE2C600D44C28 /* ContentViewRow.swift */,
+				41436F42271B1FAA0096DBC0 /* ContentDetailView.swift */,
+			);
+			path = ModuleContentView;
+			sourceTree = "<group>";
+		};
+		75FCCB8127AECF62000AE646 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				41F266C3272DD76B0012F7E4 /* TestView.swift */,
+				41454D22272F1BEE002C2BD4 /* TestResultView.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		75FCCB8227AECF76000AE646 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				41436F81271B7E390096DBC0 /* CodeTextView.swift */,
+				41EC6B6C2725C51100DFCB47 /* RectangleCard.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
