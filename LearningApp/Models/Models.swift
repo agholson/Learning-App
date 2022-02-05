@@ -39,6 +39,8 @@ struct Lesson : Decodable, Identifiable {
     var video: String
     var duration: String
     var explanation: String
+    // Add a featured property
+    var featured: Bool
 }
 
 struct Test : Decodable, Identifiable {

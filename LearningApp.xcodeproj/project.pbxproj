@@ -25,6 +25,9 @@
 		41832093270BB1B9007E20F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41832092270BB1B9007E20F0 /* ContentView.swift */; };
 		41EC6B6D2725C51100DFCB47 /* RectangleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EC6B6C2725C51100DFCB47 /* RectangleCard.swift */; };
 		41F266C4272DD76B0012F7E4 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F266C3272DD76B0012F7E4 /* TestView.swift */; };
+		75FCCB8627AED7E4000AE646 /* LessonsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FCCB8527AED7E4000AE646 /* LessonsTabView.swift */; };
+		75FCCB8827AEDD9B000AE646 /* FeaturedLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FCCB8727AEDD9B000AE646 /* FeaturedLessons.swift */; };
+		75FCCB8A27AEDF94000AE646 /* FeaturedTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FCCB8927AEDF94000AE646 /* FeaturedTitle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		41832092270BB1B9007E20F0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		41EC6B6C2725C51100DFCB47 /* RectangleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleCard.swift; sourceTree = "<group>"; };
 		41F266C3272DD76B0012F7E4 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		75FCCB8527AED7E4000AE646 /* LessonsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsTabView.swift; sourceTree = "<group>"; };
+		75FCCB8727AEDD9B000AE646 /* FeaturedLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedLessons.swift; sourceTree = "<group>"; };
+		75FCCB8927AEDF94000AE646 /* FeaturedTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedTitle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +111,9 @@
 		412E90A126FD5DFB00909955 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				75FCCB7F27AECF09000AE646 /* Home */,
-				75FCCB8027AECF49000AE646 /* ModuleContentView */,
-				75FCCB8127AECF62000AE646 /* Tests */,
-				75FCCB8227AECF76000AE646 /* Utilities */,
+				75FCCB8527AED7E4000AE646 /* LessonsTabView.swift */,
+				75FCCB8327AED30C000AE646 /* Featured */,
+				75FCCB8427AED319000AE646 /* OriginalLessonsStruct */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,6 +189,26 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		75FCCB8327AED30C000AE646 /* Featured */ = {
+			isa = PBXGroup;
+			children = (
+				75FCCB8727AEDD9B000AE646 /* FeaturedLessons.swift */,
+				75FCCB8927AEDF94000AE646 /* FeaturedTitle.swift */,
+			);
+			path = Featured;
+			sourceTree = "<group>";
+		};
+		75FCCB8427AED319000AE646 /* OriginalLessonsStruct */ = {
+			isa = PBXGroup;
+			children = (
+				75FCCB7F27AECF09000AE646 /* Home */,
+				75FCCB8027AECF49000AE646 /* ModuleContentView */,
+				75FCCB8127AECF62000AE646 /* Tests */,
+				75FCCB8227AECF76000AE646 /* Utilities */,
+			);
+			path = OriginalLessonsStruct;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,10 +280,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75FCCB8A27AEDF94000AE646 /* FeaturedTitle.swift in Sources */,
 				41F266C4272DD76B0012F7E4 /* TestView.swift in Sources */,
 				41454D23272F1BEE002C2BD4 /* TestResultView.swift in Sources */,
 				412E909526FD5D4900909955 /* HomeView.swift in Sources */,
 				417E14E8270687E600E1A4A6 /* HomeViewRow.swift in Sources */,
+				75FCCB8627AED7E4000AE646 /* LessonsTabView.swift in Sources */,
+				75FCCB8827AEDD9B000AE646 /* FeaturedLessons.swift in Sources */,
 				41832093270BB1B9007E20F0 /* ContentView.swift in Sources */,
 				41436F43271B1FAA0096DBC0 /* ContentDetailView.swift in Sources */,
 				412E909326FD5D4900909955 /* LearningApp.swift in Sources */,

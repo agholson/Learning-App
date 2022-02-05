@@ -12,7 +12,7 @@ struct LearningApp: App {
     var body: some Scene {
         WindowGroup {
             // Initialize our HomeView with the content model environment object
-            HomeView()
+            LessonsTabView()
                 .environmentObject(ContentModel())
         }
     }

@@ -87,7 +87,7 @@ class ContentModel: ObservableObject {
     func getRemoteData() {
         
         // String path for content
-        let urlString = "https://raw.githubusercontent.com/agholson/Learning-App/master/LessonConfigData/module2.json"
+        let urlString = Constants.remoteModuleJsonUrl
         
         // Create a URL object that returns an optional URL
         let url = URL(string: urlString)
