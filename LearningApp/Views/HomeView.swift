@@ -35,15 +35,9 @@ struct HomeView: View {
                                     // When the user clicks this, we execute the code to determine our current module
                                     destination: ContentView()
                                         .onAppear(perform: {
-                                            // Get the lessons here
-                                            model.getLessons(module: module) {
-                                                // Launch the lessons view only after we fetch the lessons
-                                                model.beginModule(module.id)
-                                            }
-                                            
+                                            model.beginModule(module.id)
                                         }),
-                                    // Need to get the Integer value of our String for use in the tag
-                                    tag: module.id.hash,
+                                    tag: module.id,
                                     selection: $model.currentContentSelected, // Make binding here that matches tag
                                     label: {
                                         // If user clicks on the learning card, then that's the destination
@@ -57,19 +51,24 @@ struct HomeView: View {
                                     // When the user clicks this, we execute the code to determine our current module
                                     destination: TestView()
                                         .onAppear(perform: {
-                                            // Set the questions for the chosen module
-                                            model.getQuestions(module: module) {
-                                                // Then set the model's current module in order to switch screens
-                                                model.beginTest(module.id)
-                                            }
-                                           
+                                            model.beginTest(module.id)
                                         }),
-                                    tag: module.id.hash,
+                                    tag: module.id,
                                     selection: $model.currentTestSelected, // Make binding here that matches tag
                                     label: {
                                         HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
                                         
                                     })
+//                                NavigationLink(
+//                                    tag: module.id,
+//                                    selection: $model.currentTestSelected,
+//                                    destination:
+//                                        TestView()
+//                                        .onAppear(perform: model.beginTest(module.id))
+//                                ) {
+//                                    HomeViewRow(image: module.test.image, title: "\(module.category) Test", description: module.test.description, count: "\(module.test.questions.count) questions", time: module.test.time)
+//                                }
+                                
                                 
                             }
                                 .padding(.bottom, 10)

@@ -6,11 +6,8 @@
 //
 
 import Foundation
-import Firebase
 
 class ContentModel: ObservableObject {
-    let db = Firestore.firestore()
-    
     // Stores our list of modules
     @Published var modules = [Module]() // Initialize into empty list of Modules, which we load later
     
@@ -39,172 +36,18 @@ class ContentModel: ObservableObject {
     
     init() {
         // Parse the local data, and append to the modules property
-//        getLocalData()
-        getLocalStyles()
-        
-        // Get modules from the database
-        getModules()
+        getLocalData()
         
         // Also call the remote data
-//        getRemoteData()
+        getRemoteData()
     }
     
     // MARK: - Data Methods
-    
-    /*
-     Gets our lessons from the database and sets it for the module in question
-     
-     Also uses a completion handler, which allows us to ensure this code executes first. We wait for all results from the
-     database before trying to set the module.
-     */
-    func getLessons(module: Module, completion: @escaping () -> Void) {
-        
-        // Specify path
-        let collection = db.collection("modules").document(module.id).collection("lessons")
-        
-        // Get documents
-        collection.getDocuments { querySnapshot, error in
-            // Ensure no errors, and documents returned
-            if error == nil && querySnapshot != nil {
-                
-                // Create an array to track the lessons
-                var lessons = [Lesson]()
-                
-                // Loop through the documents in the snapshot and build an array of lessons
-                for doc in querySnapshot!.documents {
-                    var lesson = Lesson()
-                    
-                    lesson.id = doc["id"] as? String ?? UUID().uuidString
-                    lesson.title = doc["title"] as? String ?? ""
-                    lesson.video = doc["video"] as? String ?? ""
-                    lesson.duration = doc["duration"] as? String ?? ""
-                    lesson.explanation = doc["explanation"] as? String ?? ""
-                    
-                    // Add lesson to the array
-                    lessons.append(lesson)
-                }
-                
-                // Cannot do this, because the module passed in is a struct/ a let constant copy of the struct
-                // Versus passing in a class, we would pass the reference of that class allowing us to change it
-                // Make these lessons belong to the correct module
-//                module.content.lessons = lessons
-                
-                // Determine the module we want to change
-                for (index, value) in self.modules.enumerated() {
-                    // If this is the ID of the module we wanted to add the lessons to, then we can use this
-                    if value.id == module.id {
-                        // Update this particular module with the lessons
-                        self.modules[index].content.lessons = lessons
-                        
-                        // Call the completion closure
-                        completion() 
-                    }
-                }
-                
-            }
-        }
-        
-    }
-    
-    func getQuestions(module: Module, completion: @escaping () -> Void) {
-        // Define the path to the collection
-        let collection = db.collection("modules").document(module.id).collection("questions")
-        
-        // Get all the documents in the questions collection
-        collection.getDocuments { querySnapshot, error in
-            // Only process this code, if the querySnapshot has documents, and no errors
-            if querySnapshot != nil && error == nil {
-                // Setup a questions array to hold the returned questions
-                var questions = [Question]()
-                // Loop through all the documents
-                for doc in querySnapshot!.documents {
-                    var question = Question()
-                    
-                    question.id = doc["id"] as? String ?? UUID().uuidString
-                    question.answers = doc["questions"] as? [String] ?? [String]()
-                    question.content = doc["content"] as? String ?? ""
-                    question.correctIndex = doc["correctIndex"] as? Int ?? 0
-                    
-                    // Add this question to our temporary list
-                    questions.append(question)
-                    
-                }
-                
-                // Update the questions for that module
-                for (index, value) in self.modules.enumerated() {
-                    // If the ID matches of our current module, then...
-                    if value.id == module.id {
-                        // Update that specific module index with these questions
-                        self.modules[index].test.questions = questions
-                        
-                        // Call the completion handler here
-                        completion()
-                    }
-                }
-                
-                
-            }
-        }
-        
-    }
-    
-    func getModules() {
-        // Specifiy path
-        let collection = db.collection("modules")
-        
-        // Get documents in modules collection
-        collection.getDocuments { snapshot, error in
-            if error == nil && snapshot != nil {
-                // Create new array for the modules
-                var modules = [Module]()
-                
-                // Loop through returned documents
-                for doc in snapshot!.documents {
-                    // Create new module instance
-                    var module = Module()
-                    
-                    // Parse document into module properties
-                    module.id = doc["id"] as? String ?? UUID().uuidString
-                    module.category = doc["category"] as? String ?? ""
-                    
-                    // Parse the content map
-                    let contentMap = doc["content"] as! [String: Any]
-                    
-                    module.content.id = contentMap["id"] as? String ?? ""
-                    module.content.description = contentMap["description"] as? String ?? ""
-                    module.content.image = contentMap["image"] as? String ?? ""
-                    module.content.time = contentMap["time"] as? String ?? ""
-                    
-                    // Parse the test content
-                    let testMap = doc["test"] as! [String: Any]
-                    
-                    module.test.id = testMap["id"] as? String ?? ""
-                    module.test.image = testMap["image"] as? String ?? ""
-                    module.test.time = testMap["time"] as? String ?? ""
-                    
-                    
-                    // Add to modules array
-                    modules.append(module)
-                    
-                }
-                
-                // Update UI code via the main thread
-                DispatchQueue.main.async {
-                    // Assign modules to the published property
-                    self.modules = modules
-                }
-                
-                
-            }
-            
-        }
-    }
     
     func getLocalData() {
         // Parses the local JSON file
         // Get URL to the local JSON object
         let jsonUrl = Bundle.main.url(forResource: "data", withExtension: "json")
-        
         
         do {
             // Read a file into a data object
@@ -240,26 +83,6 @@ class ContentModel: ObservableObject {
         }
     }
     
-    /*
-     Parses the HTML/ CSS as needed
-     */
-    func getLocalStyles() {
-        
-        // Parse the style
-        let styleUrl = Bundle.main.url(forResource: "style", withExtension: "html")
-
-        // Try to decode the style
-        do {
-            // Read the file into a data object
-            let styleData = try Data(contentsOf: styleUrl!)
-            
-            self.styleData = styleData
-        }
-        catch {
-            // Log error
-            print("Couldn't parse style data")
-        }
-    }
     
     func getRemoteData() {
         
@@ -321,7 +144,7 @@ class ContentModel: ObservableObject {
     /*
      Sets the current module, and finds the index for this module as well
      */
-    func beginModule(_ moduleid: String) {
+    func beginModule(_ moduleid: Int) {
         
         // Find index for this module ID
         for index in 0..<modules.count {
@@ -406,7 +229,7 @@ class ContentModel: ObservableObject {
     /*
      Sets the current module, and the first question
      */
-    func beginTest(_ moduleId:String) {
+    func beginTest(_ moduleId:Int) {
         
         // Set the current module
         beginModule(moduleId)

@@ -6,15 +6,9 @@
 //
 
 import SwiftUI
-import Firebase
 
 @main
 struct LearningApp: App {
-    
-    init() {
-        FirebaseApp.configure()
-    }
-    
     var body: some Scene {
         WindowGroup {
             // Initialize our HomeView with the content model environment object
