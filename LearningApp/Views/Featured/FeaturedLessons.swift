@@ -11,9 +11,6 @@ struct FeaturedLessons: View {
     
     @EnvironmentObject var model: ContentModel
     
-    @State var isDetailViewShowing = false // Tracks whether/ not to show our detailed view
-    @State var tabSelectionIndex = 0
-    
     /// Displays the lessons that are featured for each of the modules.
     var body: some View {
         NavigationView {
