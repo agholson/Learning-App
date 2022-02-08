@@ -41,7 +41,7 @@ struct FeaturedLessons: View {
                                     .bold()
                                     .padding(.leading)
                             }
-                            .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+                            .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20   ))
                         }
                         
                         
