@@ -14,44 +14,57 @@ struct FeaturedLessons: View {
     @State var isDetailViewShowing = false // Tracks whether/ not to show our detailed view
     @State var tabSelectionIndex = 0
     
-    /// <#Description#>
+    /// Displays the lessons that are featured for each of the modules.
     var body: some View {
-        
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 0) {
-                
-                // Loop through all the modules
-                ForEach(model.modules) { module in
+        NavigationView {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
                     
-                    // MARK: Display the Category Title
-                    FeaturedTitle(featuredCategory: module.category)
-                    
-                    // MARK: Display Featured Lessons
-                    // Loop through all the lessons
-                    ForEach(module.content.lessons) { lesson in
+                    // Loop through all the modules
+                    ForEach(model.modules) { module in
                         
-                        // See if the lesson is featured
-                        if lesson.featured {
-                            ZStack(alignment: .leading) {
-                                RectangleCard()
-                                    .frame(height: 48)
-                                
-                                // Display the next lesson with its title
-                                Text("\(lesson.title)")
-                                    .bold()
-                                    .padding(.leading)
+                        // MARK: Display the Category Title
+                        FeaturedTitle(featuredCategory: module.category)
+                        
+                        // MARK: Display Featured Lessons
+                        // Loop through all the lessons
+                        ForEach(module.content.lessons) { lesson in
+                            
+                            // See if the lesson is featured
+                            if lesson.featured {
+                                // Display a button for the other lesson
+                                NavigationLink(
+                                    destination:
+                                        ContentDetailView()
+                                        .onAppear(perform: {
+                                            model.currentModule = module
+                                            // Set the selected lesson ID
+                                            model.beginLesson(lesson.id)
+                                        }),
+                                    label: {
+                                        ZStack(alignment: .leading) {
+                                            RectangleCard()
+                                                .frame(height: 48)
+                                            
+                                            // Display the next lesson with its title
+                                            Text("\(lesson.title)")
+                                                .bold()
+                                                .padding(.leading)
+                                        }
+                                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+                                    })
+                                    .foregroundColor(.black)
                             }
-                            .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20   ))
                         }
-                        
                         
                     }
                     
-                    
                 }
-                
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
+
     }
     
 }
